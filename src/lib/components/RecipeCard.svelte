@@ -35,13 +35,21 @@
 
 		<p class="text-sm line-clamp-2 mb-3 opacity-80">{recipe.description || 'No description'}</p>
 
-		{#if recipe.tags.length > 0}
+		{#if recipe.tags.length > 0 || recipe.gnome_extensions_url}
 			<div class="flex flex-wrap gap-1 mb-3">
-				{#each recipe.tags.slice(0, 3) as tag}
+				{#if recipe.gnome_extensions_url}
+					<span class="chip preset-filled-success text-xs" title="Available on extensions.gnome.org - No logout required">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3 mr-1">
+							<path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+						</svg>
+						e.g.o
+					</span>
+				{/if}
+				{#each recipe.tags.slice(0, recipe.gnome_extensions_url ? 2 : 3) as tag}
 					<span class="chip preset-outlined-surface text-xs">{tag}</span>
 				{/each}
-				{#if recipe.tags.length > 3}
-					<span class="chip preset-outlined-surface text-xs">+{recipe.tags.length - 3}</span>
+				{#if recipe.tags.length > (recipe.gnome_extensions_url ? 2 : 3)}
+					<span class="chip preset-outlined-surface text-xs">+{recipe.tags.length - (recipe.gnome_extensions_url ? 2 : 3)}</span>
 				{/if}
 			</div>
 		{/if}

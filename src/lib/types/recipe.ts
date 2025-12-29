@@ -22,4 +22,6 @@ export interface RecipeIndexEntry {
 	screenshot_url?: string;
 	gnome_shell_versions: string[];
 	tags: string[];
+	/** URL to extensions.gnome.org if the extension is available there (enables installation without logout) */
+	gnome_extensions_url?: string;
 }
